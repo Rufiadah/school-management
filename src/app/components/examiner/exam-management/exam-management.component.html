@@ -1,0 +1,243 @@
+<!-- BODY CONTENT -->
+<div class="container-fluid ml-3" style="background: #fff ">
+  <!-- SEARCH AND ADD -->
+  <!-- <div class="row" style="background: #fff; margin: 1px; padding-top: 2%">
+    <div class="col-lg-4 col-xs-6 mmb-2">
+      <input
+        class="form-control"
+        placeholder="Search All"
+        style="height: 38px"
+        (keyup)="applyFilter($event)"
+      />
+    </div>
+    <div class="col-lg-8 col-xs-6 mmb-2">
+      <a
+        (click)="navigateToExaminerForm()"
+        class="btn btn-primary"
+        style="margin-top: 0.5%; margin-right: 3%; float: right; color: #fff; margin-top: 10px;"
+        >+ Add Exam</a
+      >
+
+    </div>
+    <h2 style="word-spacing: 5px;">Exam Management</h2>
+  </div> -->
+  <div class="row p-1">
+    <div class="col-4 mt-4">
+      <span class="search">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search All"
+          style="height: 45px"
+          (keyup)="applyFilter($event)"
+        />
+
+      </span>
+    </div>
+    <div class="col-lg-8 col-xs-6 mmb-2">
+      <a
+        (click)="navigateToExaminerForm()"
+        class="btn btn-primary"
+        style="margin-top: 0.5%; margin-right: 3%; float: right; color: #fff; margin-top: 10px;"
+        >+ Add Exam</a
+      >
+
+    </div>
+    <div class="col-1">
+      <i
+        class="glyphicon glyphicon-tasks font-medium-3"
+        style="margin-top: 10px; padding-left: 20px"
+      ></i>
+    </div>
+  </div>
+  <h2 class="ml-2">Exam Management</h2>
+
+  <!-- SEARCH AND ADD -->
+
+  <!-- TABLE -->
+  <div class="row">
+    <div class="mat-elevation-z8 mt-4 pl-0" style="overflow-x: auto">
+      <table mat-table [dataSource]="dataSource" style="width: 100%" matSort (matSortChange)="announceSortChange($event)">
+        <!-- ID Column -->
+        <ng-container matColumnDef="exam_name">
+          <th
+            style="width: 10rem; min-width: 10rem"
+            mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name"
+          >
+            Exam Name
+          </th>
+          <td mat-cell *matCellDef="let row">{{ row.exam_name }}</td>
+        </ng-container>
+
+        <!-- Progress Column -->
+        <ng-container matColumnDef="class_name">
+          <th
+            style="width: 10rem; min-width: 10rem"
+            mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name"
+
+          >
+            Class
+          </th>
+          <td mat-cell *matCellDef="let row">{{ row.class_name }}</td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="division_name">
+          <th
+            style="width: 10rem; min-width: 10rem"
+            mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name"
+
+          >
+            Division
+          </th>
+          <td mat-cell *matCellDef="let row">{{ row.division_name }}</td>
+        </ng-container>
+
+        <!-- Fruit Column -->
+        <ng-container matColumnDef="subject_name">
+          <th
+            style="width: 10rem; min-width: 10rem"
+           mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name"
+
+          >
+            Subject
+          </th>
+          <td mat-cell *matCellDef="let row">{{ row.subject_name }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="year_name">
+          <th
+            style="width: 10rem; min-width: 10rem"
+            mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number"
+
+          >
+            Year
+          </th>
+          <td mat-cell *matCellDef="let row">
+            {{ row.year_name }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="semester_name">
+          <th
+            style="width: 10rem; min-width: 10rem"
+            mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number"
+
+          >
+            Semester
+          </th>
+          <td mat-cell *matCellDef="let row">
+            {{ row.semester_name }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="exam_date">
+          <th
+            style="width: 10rem; min-width: 10rem"
+            mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number"
+
+          >
+            Exam Date
+          </th>
+          <td mat-cell *matCellDef="let row">
+            {{ row.exam_date }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Action">
+          <th
+            style="width: 10rem; min-width: 10rem"
+            mat-header-cell
+            *matHeaderCellDef
+          >
+            Action
+          </th>
+          <td mat-cell *matCellDef="let row">
+            <a class="d-flex align-items-center gap-3">
+              <i
+                (click)="_editExam(row.exam_details_id)"
+                class="fas fa-pencil-alt"
+              ></i>
+              <!-- <i class="fas fa-trash"></i> -->
+              <!-- Button trigger modal -->
+              <button
+                (click)="openDeleteExamModal(row)"
+                class="fas fa-trash border-0"
+                style="background: transparent"
+              ></button>
+
+              <!-- Modal -->
+              <div
+                class="modal fade"
+                id="exampleModal"
+                tabindex="-1"
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">
+                        Delete Exam?
+                      </h5>
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                    <div class="modal-body">
+                      <span class="fw-bold">Exam Name :</span>
+                      {{ examName }}
+                      <span class="fw-bold">Exam Date :</span> {{ examDate }}
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                      >
+                        Close
+                      </button>
+                      <button
+                        (click)="deleteSelectedExam()"
+                        type="button"
+                        data-bs-dismiss="modal"
+                        class="btn btn-primary"
+                      >
+                        Yes
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Modal -->
+            </a>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+    <mat-paginator
+    (page)="handlePageEvent($event)"
+    [length]="length"
+    [pageSize]="pageSize"
+    [pageIndex]="pageIndex"
+    aria-label="Select page of users"
+  ></mat-paginator>
+  </div>
+
+
+
+
+  <!-- TABLE -->
+</div>
+
+<!-- BODY CONTENT -->
+
+<!-- BEGIN: Footer-->
+
+<!-- END: Footer-->

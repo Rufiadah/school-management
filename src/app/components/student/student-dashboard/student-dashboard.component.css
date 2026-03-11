@@ -1,0 +1,20 @@
+.curspoint ul {
+  cursor: pointer !important;
+}
+
+
+input {
+  outline: none !important;
+}
+
+::ng-deep .btn-primary {
+  background: rgb(241, 123, 76) !important;
+  color: #fff !important;
+  border: none !important;
+}
+
+::ng-deep .btn-primary:hover {
+  background: rgb(241, 123, 76) !important;
+  color: #fff !important;
+  border: none !important;
+}

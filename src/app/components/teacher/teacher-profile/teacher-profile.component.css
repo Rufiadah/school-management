@@ -1,0 +1,29 @@
+.curspoint ul {
+  cursor: pointer !important;
+}
+
+::ng-deep .btn-primary {
+  background: rgb(241, 123, 76) !important;
+  color: #fff !important;
+  border: none !important;
+}
+::ng-deep .btn-primary:hover {
+  background: rgb(241, 123, 76) !important;
+  color: #fff !important;
+  border: none !important;
+}
+
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active {
+  color: #fff;
+  background-color: rgb(241, 123, 76) !important;
+}
+
+input {
+  outline: none !important;
+}
+
+::ng-deep .mat-form-field-flex {
+  min-height: 45px;
+}

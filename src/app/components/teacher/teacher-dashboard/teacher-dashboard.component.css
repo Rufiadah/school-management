@@ -1,0 +1,16 @@
+.btn,
+.btn-primary {
+  background: rgb(241, 123, 76);
+  border: none;
+}
+.btn:hover,
+.btn-primary:hover {
+  background: rgb(241, 123, 76);
+  border: none;
+}
+
+::ng-deep .btn-primary:not(:disabled):not(.disabled):active {
+  background: rgb(241, 123, 76);
+  border: none;
+  color: #fff;
+}

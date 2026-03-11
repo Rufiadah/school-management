@@ -1,0 +1,215 @@
+<div class="container">
+  <div class="row">
+    <form *ngIf="result" [formGroup]="editExaminer" (ngSubmit)="onSubmit()">
+      <div class="row right-div-outer">
+        <div class="col-md-4">
+          <mat-form-field appearance="fill">
+            <mat-label>Select Institute *</mat-label>
+            <mat-select formControlName="institute">
+              <mat-option
+                *ngFor="let institute of institutelist"
+                [value]="institute.id"
+              >
+                {{ institute.institute_name }}</mat-option
+              >
+            </mat-select>
+            <mat-error *ngIf="editExaminer.controls.institute.errors?.required"
+              >Institute is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-4">
+          <mat-form-field appearance="fill">
+            <mat-label>Teacher ID</mat-label>
+            <input matInput formControlName="employee_id" />
+            <mat-error
+              *ngIf="editExaminer.controls.employee_id.errors?.required"
+              >Teacher ID is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- <div class="col-md-4">
+          <mat-form-field appearance="fill">
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="user_name" />
+            <mat-error *ngIf="editExaminer.controls.user_name.errors?.required"
+              >Name is required
+            </mat-error>
+          </mat-form-field>
+        </div> -->
+
+        <div class="col-md-4">
+          <mat-form-field appearance="fill">
+            <mat-label>First Name</mat-label>
+            <input matInput formControlName="firstname" />
+            <mat-error *ngIf="editExaminer.controls.firstname.errors?.required"
+              >Name is required</mat-error
+            >
+            <mat-error *ngIf="editExaminer.controls.firstname.errors?.pattern">
+              Only alphabets and spaces are allowed
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-4">
+          <mat-form-field appearance="fill">
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="lastname" />
+            <mat-error *ngIf="editExaminer.controls.lastname.errors?.required"
+              >Last name is required</mat-error
+            >
+            <mat-error *ngIf="editExaminer.controls.lastname.errors?.pattern">
+              Only alphabets and spaces are allowed
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-4">
+          <mat-form-field appearance="fill">
+            <mat-label>Mobile</mat-label>
+            <input matInput formControlName="user_mobile" />
+            <mat-error
+              *ngIf="editExaminer.controls.user_mobile.errors?.required"
+            >
+              Mobile is required
+            </mat-error>
+            <mat-error
+              *ngIf="
+                editExaminer.controls.user_mobile.errors?.minlength ||
+                editExaminer.controls.user_mobile.errors?.maxlength
+              "
+            >
+              Mobile must be between 8 and 15 characters
+            </mat-error>
+            <mat-error
+              *ngIf="editExaminer.controls.user_mobile.errors?.pattern"
+            >
+              Mobile must only contain numbers
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-4">
+          <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input
+              matInput
+              placeholder="pankaj@gmail.com"
+              formControlName="user_email"
+            />
+            <mat-error *ngIf="editExaminer.controls.user_email.errors?.required"
+              >Email is required</mat-error
+            >
+            <mat-error *ngIf="editExaminer.controls.user_email.errors?.email"
+              >Please enter a valid email address.</mat-error
+            >
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-4">
+          <mat-form-field appearance="fill">
+            <mat-label>Password</mat-label>
+            <input
+              matInput
+              [type]="hide ? 'password' : 'text'"
+              formControlName="user_password"
+            />
+            <p
+              mat-icon-button
+              matSuffix
+              (click)="hide = !hide"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide"
+            >
+              <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+            </p>
+            <mat-error
+              *ngIf="editExaminer.controls.user_password.errors?.required"
+              >Password is required</mat-error
+            >
+            <mat-error
+              *ngIf="editExaminer.controls.user_password.errors?.minlength"
+            >
+              Password must be at least 6 characters long
+            </mat-error>
+            <mat-error
+              *ngIf="editExaminer.controls.user_password.errors?.pattern"
+            >
+              Password must contain at least one special character, one number,
+              one capital letter, and one small letter
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field appearance="fill">
+            <mat-label>Date of Birth</mat-label>
+            <input
+              matInput
+              [matDatepicker]="picker"
+              formControlName="user_dob"
+            />
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="editExaminer.controls.user_dob.errors?.required"
+              >Date Of Birth is Invalid
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field appearance="fill">
+            <mat-label>Aadhar Number</mat-label>
+            <input matInput formControlName="aadhar_number" />
+            <mat-error
+              *ngIf="editExaminer.controls.aadhar_number.errors?.required"
+            >
+              Aadhar Number is required
+            </mat-error>
+            <mat-error
+              *ngIf="editExaminer.controls.aadhar_number.errors?.minlength"
+            >
+              Aadhar Number must be at least 12 characters
+            </mat-error>
+            <mat-error
+              *ngIf="editExaminer.controls.aadhar_number.errors?.pattern"
+            >
+              Aadhar Number must only contain numbers
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field appearance="fill" >
+            <mat-label>Address</mat-label>
+            <textarea matInput formControlName="address" rows="3"></textarea>
+            <mat-error *ngIf="editExaminer.controls.address.errors?.required"
+              >Address is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-lg-2">
+          <label for="">Profile Picture</label> <br />
+          <input type="file" id="my_file" (change)="readUrl($event)" />
+        </div>
+        <div class="col-lg-2">
+          <img *ngIf="ImgUrl" src="{{ ImgUrl }}" class="img-fluid img" />
+        </div>
+
+
+        <div class="col-md-12" style="padding-bottom: 24%">
+          <button
+            type="submit"
+            class="btn btn-primary  float-right"
+          >
+            Update
+          </button>
+          <!-- [disabled]="!addCallCenter.valid"  -->
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

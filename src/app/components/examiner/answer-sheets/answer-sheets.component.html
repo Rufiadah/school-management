@@ -1,0 +1,223 @@
+<!-- BODY CONTENT -->
+<div
+  class="container-fluid shadow"
+  style="
+    max-width: 100%;
+    max-height: 100vh;
+    background: #fff;
+    margin-left: 1rem;
+  "
+>
+  <!-- SEARCH AND ADD -->
+  <div class="row p-1">
+    <div class="col-4 mt-4">
+      <span class="search">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search All"
+          style="height: 45px"
+          (keyup)="applyFilter($event)"
+        />
+        <div style="margin-top: 1em"></div>
+      </span>
+    </div>
+    <div class="col-2"></div>
+
+    <div class="col-1"></div>
+  </div>
+  <h2 class="ml-2">Answer Sheets</h2>
+
+
+ <!-- <h2 style="word-spacing: 5px; margin-left: 16px; margin-top: 10px;">Answer Sheet</h2> -->
+ <!--  -->
+
+  <!-- SEARCH AND ADD -->
+
+  <!-- TABLE -->
+  <div class="row ">
+    <div class="mat-elevation-z8 mt-4 pl-0" style="overflow-x: auto">
+      <table mat-table [dataSource]="dataSource" style="width: 100%">
+        <!-- ID Column -->
+        <ng-container matColumnDef="FolderName">
+          <th
+            style="width: 15rem; min-width: 10rem"
+            mat-header-cell
+            *matHeaderCellDef
+          >
+            Folder Name
+          </th>
+          <td mat-cell *matCellDef="let row">
+            <i class="fas fa-folder" style="color: #fff700"></i>
+            {{ row.sheet_name }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="subject_name">
+          <th
+            style="width: 10rem; min-width: 10rem"
+            mat-header-cell
+            *matHeaderCellDef
+          >
+            Subject
+          </th>
+          <td mat-cell *matCellDef="let row">{{ row.subject }}</td>
+        </ng-container>
+
+        <!-- Progress Column -->
+        <ng-container matColumnDef="class_name">
+          <th
+            style="width: 10rem; min-width: 10rem"
+            mat-header-cell
+            *matHeaderCellDef
+          >
+            Class
+          </th>
+          <td mat-cell *matCellDef="let row">{{ row.class_name }}</td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="division_name">
+          <th
+            style="width: 10rem; min-width: 10rem"
+            mat-header-cell
+            *matHeaderCellDef
+          >
+            Division
+          </th>
+          <td mat-cell *matCellDef="let row">{{ row.division_name }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="exam_date">
+          <th
+            style="width: 10rem; min-width: 10rem"
+            mat-header-cell
+            *matHeaderCellDef
+          >
+            Year Name
+          </th>
+          <td mat-cell *matCellDef="let row">{{ row.year_name }}</td>
+        </ng-container>
+
+        <!-- Fruit Column -->
+
+        <ng-container matColumnDef="totalStudents">
+          <th
+            style="width: 10rem; min-width: 10rem"
+            mat-header-cell
+            *matHeaderCellDef
+          >
+            Total Students
+          </th>
+          <td mat-cell *matCellDef="let row">53</td>
+        </ng-container>
+
+        <ng-container matColumnDef="UploadedBy">
+          <th
+            style="width: 10rem; min-width: 10rem"
+            mat-header-cell
+            *matHeaderCellDef
+          >
+            Uploaded By
+          </th>
+          <td mat-cell *matCellDef="let row">Jayesh Goyal</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Action">
+          <th
+            style="width: 10rem; min-width: 10rem"
+            mat-header-cell
+            *matHeaderCellDef
+          >
+            Action
+          </th>
+          <td mat-cell *matCellDef="let row">
+            <a class="d-flex align-items-center gap-3">
+              <button (click)="openSendModal(row)" class="btn btn-primary">
+                Assign
+              </button>
+            </a>
+
+            <!-- Modal -->
+            <div
+              class="modal fade"
+              id="exampleModalLong"
+              tabindex="-1"
+              role="dialog"
+              aria-labelledby="exampleModalLongTitle"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLongTitle">
+                      Assign to Teacher
+                    </h3>
+                    <button
+                      type="button"
+                      class="close"
+                      data-dismiss="modal"
+                      aria-label="Close"
+                      (click)="closeModal()"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div
+                    class="d-flex modal-body flex-column justify-content-center m-auto align-items-center"
+                    style="gap: 1rem"
+                  >
+                    <div *ngFor="let list of teacherDataList; currentRow">
+                      <button
+                        (click)="assignTeacher(list, currentRow)"
+                        class="btn btn-primary text-white border-0"
+                        style="width: 300px"
+                      >
+                        {{ list.name }} ({{ list.email }})
+                      </button>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-dismiss="modal"
+                      (click)="closeModal()"
+                    >
+                      Close
+                    </button>
+                    <button
+                      (click)="closeModal()"
+                      type="button"
+                      class="btn btn-primary"
+                    >
+                      Save changes
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+    <mat-paginator
+    (page)="handlePageEvent($event)"
+    [length]="length"
+    [pageSize]="pageSize"
+    [pageIndex]="pageIndex"
+    aria-label="Select page of users"
+  ></mat-paginator>
+  </div>
+
+
+
+
+  <!-- TABLE -->
+</div>
+<!-- BODY CONTENT -->
+
+<!-- END: Content-->

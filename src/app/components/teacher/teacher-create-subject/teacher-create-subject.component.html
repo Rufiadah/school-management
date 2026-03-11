@@ -1,0 +1,401 @@
+<div class="card ml-3" style="height: auto">
+  <div class="card-body">
+    <form [formGroup]="createSubject">
+      <div class="row p-2 mb-0">
+        <div
+          class="spinner-border text-primary m-1"
+          justify-content-center
+          style="width: 3rem; height: 3rem"
+          role="status"
+          *ngIf="loader"
+        >
+          <span class="visually-hidden"><h2>Loading...</h2></span>
+        </div>
+
+        <!--Loader Div Ends-->
+        <div class="container-fluid bg-image" *ngIf="!loader">
+          <div class="row p-2">
+            <div class="card">
+              <div class="row p-2 mt-3">
+                <div class="col-3">
+                  <div class="form-group">
+                    <!-- <label for="Total Marks">Total Marks</label>
+                <input type="text" class="form-control" /> -->
+                    <mat-form-field appearance="fill">
+                      <mat-label>Total Marks</mat-label>
+                      <input
+                        type="number"
+                        min="1"
+                        matInput
+                        formControlName="totalMarks"
+                      />
+                      <mat-error>Total Marks is required </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="col-3">
+                  <div class="form-group">
+                    <!-- <label for="Pass Marks">Pass Marks</label>
+                <input type="text" class="form-control" /> -->
+                    <mat-form-field appearance="fill">
+                      <mat-label>Pass Marks</mat-label>
+                      <input
+                        type="number"
+                        min="1"
+                        matInput
+                        formControlName="PassMarks"
+                      />
+                      <mat-error>Pass Marks is required </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="col-3">
+                  <div class="form-group">
+                    <!-- <label for="Total Que">Total Question</label> -->
+                    <!-- <input type="text" class="form-control" /> -->
+                    <mat-form-field appearance="fill">
+                      <mat-label>Total Question</mat-label>
+                      <input
+                        type="number"
+                        min="1"
+                        matInput
+                        formControlName="totalQue"
+                      />
+                      <mat-error>Total Que is required </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+              <div class="col-9">
+                <div class="form-group">
+                  <mat-form-field appearance="fill" style="margin-bottom: 0px">
+                    <mat-label>Add Instructions</mat-label>
+                    <!-- <input type="text" matInput formControlName="addInstructions" /> -->
+                    <textarea matInput rows="3" cols="33"></textarea>
+                    <mat-error>Instructions is required </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </div>
+          <h2 style="padding-left: 0px" class="mt-3">Add Question</h2>
+
+          <div class="row p-2">
+            <div class="card">
+              <div class="row p-2 mt-3">
+                <div class="col-3">
+                  <!-- <select class="form-select">
+                      <option selected>Select Question Number</option>
+                      <option value="1">One</option>
+                      <option value="2">Two</option>
+                      <option value="3">Three</option>
+                    </select> -->
+                  <!-- <mat-form-field appearance="fill">
+                      <mat-label>Select Question Number</mat-label>
+                      <mat-select formControlName="queNumber">
+                        <mat-option value="Hindi">Hindi</mat-option>
+                        <mat-option value="English">English</mat-option>
+                        <mat-option value="Maths">Maths</mat-option>
+                        <mat-option value="Science">Science</mat-option>
+                      </mat-select>
+                      <mat-error>Question Number is required </mat-error>
+                    </mat-form-field> -->
+                  <mat-form-field appearance="fill" style="padding-left: 0px">
+                    <mat-label>Select Question Number</mat-label>
+                    <mat-select formControlName="queNumber">
+                      <mat-option
+                        *ngFor="let queNumber of TeacherQuestionNumberList"
+                        [value]="queNumber.id"
+                      >
+                        {{ queNumber.question_number }}</mat-option
+                      >
+                    </mat-select>
+                    <mat-error>Question Number is required</mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-3">
+                  <!-- <select class="form-select">
+                      <option selected>Select Question Type</option>
+                      <option value="1">One</option>
+                      <option value="2">Two</option>
+                      <option value="3">Three</option>
+                    </select> -->
+                  <!-- <mat-form-field appearance="fill">
+                      <mat-label>Select Question Type</mat-label>
+                      <mat-select formControlName="queType">
+                        <mat-option value="Hindi">Hindi</mat-option>
+                        <mat-option value="English">English</mat-option>
+                        <mat-option value="Maths">Maths</mat-option>
+                        <mat-option value="Science">Science</mat-option>
+                      </mat-select>
+                      <mat-error>Question Type is required </mat-error>
+                    </mat-form-field> -->
+                  <!-- <mat-form-field appearance="fill">
+                        <mat-label>Select Question Type</mat-label>
+                        <mat-select formControlName="queType">
+                          <mat-option
+                            *ngFor="let queType of TeacherQuestionTypeList"
+                            [value]="queType.id"
+                          >
+                            {{ queType.question_type }}</mat-option
+                          >
+                        </mat-select>
+                        <mat-error>Question Type is required</mat-error>
+                      </mat-form-field> -->
+                  <mat-form-field appearance="fill">
+                    <mat-label>Select Question Type</mat-label>
+                    <mat-select
+                      formControlName="queType"
+                      (selectionChange)="onQueTypeChange($event)"
+                    >
+                      <mat-option
+                        *ngFor="let queType of TeacherQuestionTypeList"
+                        [value]="queType.id"
+                      >
+                        {{ queType.question_type }}</mat-option
+                      >
+                    </mat-select>
+                    <mat-error>Question Type is required</mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-3">
+                  <!-- <select class="form-select">
+                      <option selected>Select Question Part</option>
+                      <option value="1">One</option>
+                      <option value="2">Two</option>
+                      <option value="3">Three</option>
+                    </select> -->
+                  <mat-form-field appearance="fill">
+                    <mat-label>Select Question Part</mat-label>
+                    <mat-select formControlName="quePart">
+                      <mat-option
+                        *ngFor="let quePart of TeacherQuestionPartList"
+                        [value]="quePart.id"
+                      >
+                        {{ quePart.question_part }}</mat-option
+                      >
+                    </mat-select>
+                    <mat-error>Question Part is required </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row p-2">
+                <div class="col-3">
+                  <div class="form-group">
+                    <!-- <input
+                        type="text"
+                        class="form-control"
+                        placeholder="write Question here"
+                      /> -->
+                    <mat-form-field appearance="fill">
+                      <mat-label>Write Question here</mat-label>
+                      <input matInput formControlName="questions" />
+                      <mat-error>Question is required </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="col-3">
+                  <!-- <select class="form-select">
+                      <option selected>Select Question Mark</option>
+                      <option value="1">One</option>
+                      <option value="2">Two</option>
+                      <option value="3">Three</option>
+                    </select> -->
+                  <mat-form-field appearance="fill">
+                    <mat-label>Select Question Mark</mat-label>
+                    <mat-select formControlName="queMark">
+                      <mat-option
+                        *ngFor="let queMark of TeacherQuestionMarkList"
+                        [value]="queMark.id"
+                      >
+                        {{ queMark.question_mark }}</mat-option
+                      >
+                    </mat-select>
+                    <mat-error>Question Mark is required </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row w-100 p-2">
+                <div class="col-lg-9">
+                  <mat-form-field *ngIf="!showInput" appearance="fill">
+                    <mat-label>Write Ans. Here</mat-label>
+                    <textarea formControlName="ansOne" matInput></textarea>
+                  </mat-form-field>
+                  <ng-container *ngIf="showInput">
+                    <ng-container
+                      *ngFor="let inputField of inputFields; let i = index"
+                    >
+                      <mat-form-field appearance="fill">
+                        <mat-label>Write Ans Here</mat-label>
+                        <input
+                          class="w-50"
+                          formControlName="multiOne"
+                          matInput
+                        />
+                        <div class="col-lg-4" class="checkBox">
+                          <div class="form-check">
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              (change)="onChangeMultiOneCorrect($event)"
+                              id="multiOneCorrect"
+                            />
+                            <label
+                              class="form-check-label"
+                              for="multiOneCorrect"
+                              >select correct Ans.</label
+                            >
+                          </div>
+                        </div>
+                      </mat-form-field>
+                      <mat-form-field appearance="fill">
+                        <mat-label>Write Ans Here</mat-label>
+                        <input
+                          class="w-50"
+                          formControlName="multiTwo"
+                          matInput
+                        />
+                        <div class="col-lg-4" class="checkBox">
+                          <div class="form-check">
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              (change)="onChangeMultiTwoCorrect($event)"
+                              id="multiTwoCorrect"
+                            />
+                            <label
+                              class="form-check-label"
+                              for="multiOneCorrect"
+                              >select correct Ans.</label
+                            >
+                          </div>
+                        </div>
+                      </mat-form-field>
+                      <mat-form-field appearance="fill">
+                        <mat-label>Write Ans Here</mat-label>
+                        <input
+                          class="w-50"
+                          formControlName="multiThree"
+                          matInput
+                        />
+                        <div class="col-lg-4" class="checkBox">
+                          <div class="form-check">
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              (change)="onChangeMultiThreeCorrect($event)"
+                              id="multiThreeCorrect"
+                            />
+                            <label
+                              class="form-check-label"
+                              for="multiOneCorrect"
+                              >select correct Ans.</label
+                            >
+                          </div>
+                        </div>
+                      </mat-form-field>
+                      <mat-form-field appearance="fill">
+                        <mat-label>Write Ans Here</mat-label>
+                        <input
+                          class="w-50"
+                          formControlName="multiFour"
+                          matInput
+                        />
+                        <div class="col-lg-4" class="checkBox">
+                          <div class="form-check">
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              (change)="onChangeMultiFourCorrect($event)"
+                              id="multiFourCorrect"
+                            />
+                            <label
+                              class="form-check-label"
+                              for="multiOneCorrect"
+                              >select correct Ans.</label
+                            >
+                          </div>
+                        </div>
+                      </mat-form-field>
+                    </ng-container>
+                  </ng-container>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-4">
+                  <!-- <span class="search">
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="write Ans Here"
+                      />
+                      <button class="btn bg-danger text-white">-</button>
+                    </span> -->
+                  <!-- <mat-form-field appearance="fill"> -->
+                  <!-- <mat-label>Write Ans Here</mat-label>
+                        <input matInput formControlName="answerSecond" /> -->
+                  <!-- <button mat-raised-button color="primary">+</button> -->
+                  <!-- <mat-error>Answer is required </mat-error> -->
+                  <!-- </mat-form-field> -->
+                </div>
+              </div>
+
+              <div class="row p-3" style="padding-left: 25px">
+                <div class="d-flex align-items-center" style="gap: 1rem">
+                  <button
+                    (click)="onSubmit()"
+                    class="btn text-white"
+                    style="background-color: rgb(241, 123, 76)"
+                  >
+                    Add Question Paper
+                  </button>
+
+                  <button
+                    (click)="navigateDashboard()"
+                    class="btn text-white"
+                    style="background-color: rgb(241, 123, 76)"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- <div class="row float-end">
+            <div class="col-1">
+              <button
+                (click)="navigateDashboard()"
+                class="btn"
+                style="
+                  background-color: #fff;
+                  border: 2px solid #4b78bb;
+                  color: #4b78bb;
+                "
+              >
+                Cancel
+              </button>
+            </div>
+            <div class="col-2">
+              <button
+                (click)="navigateDashboard()"
+                class="btn text-white"
+                style="background-color: #4b78bb"
+              >
+                save
+              </button>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

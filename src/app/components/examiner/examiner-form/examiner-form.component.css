@@ -1,0 +1,50 @@
+input,
+select {
+  width: 100%;
+}
+.curspoint ul {
+  cursor: pointer !important;
+}
+
+::ng-deep .btn-primary {
+  background: rgb(241, 123, 76) !important;
+  color: #fff !important;
+  border: none !important;
+}
+::ng-deep .btn-primary:hover {
+  background: rgb(241, 123, 76) !important;
+  color: #fff !important;
+  border: none !important;
+}
+
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: black !important;
+  opacity: 1 !important; /* Firefox */
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: black !important;
+}
+
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: black !important;
+}
+
+/* Chrome, Safari, Edge, Opera */
+::ng-deep input::-webkit-outer-spin-button,
+::ng-deep input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+::ng-deep input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+::ng-deep .mat-form-field-flex {
+  height: 45px;
+}

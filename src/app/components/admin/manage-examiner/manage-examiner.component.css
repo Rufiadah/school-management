@@ -1,0 +1,25 @@
+::ng-deep .mat-form-field-should-float .mat-form-field-label-wrapper {
+  display: none !important;
+}
+::ng-deep .mat-focused .al-subscribe-form-placeholder,
+::ng-deep .mat-form-field-invalid .al-subscribe-form-placeholder {
+  display: none !important;
+}
+
+
+::ng-deep .btn-primary {
+  background: rgb(241, 123, 76) !important;
+  color: #fff !important;
+  border: none !important;
+}
+
+::ng-deep .btn-primary:hover {
+  background: rgb(241, 123, 76) !important;
+  color: #fff !important;
+  border: none !important;
+}
+
+.input:focus {
+  box-shadow: none !important;
+  border-color: rgb(241, 123, 76) !important;
+}

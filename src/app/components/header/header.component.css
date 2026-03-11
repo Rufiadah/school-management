@@ -1,0 +1,4 @@
+::ng-deep .dropdown-item:active {
+  background-color: rgb(241, 123, 76) !important;
+  color: #fff !important;
+}

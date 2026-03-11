@@ -1,0 +1,29 @@
+.curspoint ul {
+  cursor: pointer !important;
+}
+
+/* .btn {
+    color: #4b78bb !important;
+    border-color: #4b78bb !important;
+    line-height: 0.7 !important;
+    padding: 0.786rem 2rem !important;
+  } */
+
+::ng-deep .btn-primary {
+  background: rgb(241, 123, 76) !important;
+  color: #fff !important;
+  border: none !important;
+}
+::ng-deep .btn-primary:hover {
+  background: rgb(241, 123, 76) !important;
+  color: #fff !important;
+  border: none !important;
+}
+
+input {
+  outline: none !important;
+}
+
+::ng-deep .mat-form-field-flex {
+  min-height: 45px;
+}
